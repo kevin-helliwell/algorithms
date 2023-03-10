@@ -1,3 +1,5 @@
+// O(n) method to find an item from a list of items
+
 pub fn linear_search(haystack: &[i32], needle: i32) -> bool {
     for i in 0..haystack.len() {
         if needle == haystack[i] {
