@@ -1,12 +1,13 @@
 // O(n) method to find an item from a list of items
+// Changes implemented that clippy suggested https://rust-lang.github.io/rust-clippy/master/index.html#needless_range_loop
 
-pub fn linear_search(haystack: &[i32], needle: i32) -> bool {
-    for i in 0..haystack.len() {
+pub fn linear_search(haystack: &[usize], needle: usize) -> bool {
+    for &i in haystack {
         if needle == haystack[i] {
             return true;
         }
     }
-    return false;
+    false
 }
 
 fn main() {
