@@ -9,7 +9,7 @@ pub fn two_crystal_balls(breaks: &[bool]) -> usize {
 
     // Loops through array by jump_amount in each leap
     while i < breaks.len() {
-        if breaks[i] == true {
+        if breaks[i] {
             break;
         }
         i += jump_amount;
@@ -19,7 +19,7 @@ pub fn two_crystal_balls(breaks: &[bool]) -> usize {
     i -= jump_amount;
     let mut j = 0;
     while j <= jump_amount && i < breaks.len() {
-        if breaks[i] == true {
+        if breaks[i] {
             return i;
         }
         i += 1;
@@ -27,7 +27,7 @@ pub fn two_crystal_balls(breaks: &[bool]) -> usize {
     }
 
     // sentinel value: No occurence of true within the array
-    return usize::MAX;
+    usize::MAX
 }
 
 fn main() {
