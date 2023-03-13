@@ -1,6 +1,8 @@
 // O(log(n)) method to find an item from a sorted list of items
 // Note: low is inclusive, high is exclusive [low, high)
 
+use std::cmp::Ordering; // Suggested from cargo clippy: https://rust-lang.github.io/rust-clippy/master/index.html#comparison_chain
+
 pub fn binary_search(haystack: &[usize], needle: usize) -> bool {
     let mut low_index = 0;
     let mut high_index = haystack.len() - 1;
@@ -8,15 +10,20 @@ pub fn binary_search(haystack: &[usize], needle: usize) -> bool {
     while low_index < high_index {
         let middle_index = low_index + (high_index - low_index) / 2;
         let middle_value = haystack[middle_index];
-        if middle_value == needle {
-            return true;
-        } else if middle_value > needle {
-            high_index = middle_index;
-        } else {
-            low_index = middle_index + 1;
+
+        match middle_value.cmp(&needle) {
+            Ordering::Equal => {
+                return true;
+            }
+            Ordering::Greater => {
+                high_index = middle_index;
+            }
+            Ordering::Less => {
+                low_index = middle_index + 1;
+            }
         }
     }
-    return false;
+    false
 }
 
 fn main() {
