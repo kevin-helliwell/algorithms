@@ -15,8 +15,28 @@ pub fn bubble_sort(array: &mut [usize]) {
     }
 }
 
+pub fn bubble_sort_clone(array: &mut [usize]) -> &mut [usize] {
+    //    bubble_sort(array);
+    let new_array = array;
+    for i in 0..new_array.len() {
+        for j in 0..(new_array.len() - 1 - i) {
+            // if current element > next element, swap positions
+            if new_array[j] > new_array[j + 1] {
+                let larger_element = new_array[j]; // store larger element in variable for swap
+                let smaller_element = new_array[j + 1]; // store smaller element in variable for swap
+                new_array[j] = smaller_element; // smaller element -> j position
+                new_array[j + 1] = larger_element; // larger element -> j+1 position
+            }
+        }
+    }
+    new_array
+}
+
 fn main() {
     let mut test_array = [4, 5, 1, 2, 3];
     bubble_sort(&mut test_array);
     println!("{:?}", test_array); // "{:?}" to display arrays in println! (Debug trait)
+    let mut test_array_clone = [4, 5, 1, 2, 3];
+    let sorted_array = bubble_sort_clone(&mut test_array_clone);
+    println!("{:?}", sorted_array);
 }
